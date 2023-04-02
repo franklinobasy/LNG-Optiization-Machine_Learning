@@ -48,14 +48,14 @@ class App(tk.Tk):
 
         ##############################################################
         # Row 1 Elements 
-        lng_frame = tk.LabelFrame(self.row1, text = "LNG Flow", width = 100, height= 50)
+        lng_frame = tk.LabelFrame(self.row1, text = "LNG Flow", width = 100, height= 50, bg="green", fg="white")
         self.lng = tk.DoubleVar()
         lng_Entry = tk.Entry(lng_frame, textvariable=self.lng, width = 50)
         lng_Entry.pack()
         lng_frame.pack_propagate(False)
         lng_frame.pack(side=tk.LEFT, pady= (5, 5), padx=(3, 3),  anchor=tk.NW)
 
-        mr_return_temp_frame = tk.LabelFrame(self.row1, text = "LNG Rundown Temp.", width = 100, height= 50)
+        mr_return_temp_frame = tk.LabelFrame(self.row1, text = "LNG Rundown Temp.", width = 100, height= 50, bg="green", fg="white")
         self.mr_return_temp = tk.DoubleVar()
         mr_return_temp_Entry = tk.Entry(mr_return_temp_frame, textvariable=self.mr_return_temp, width = 50)
         mr_return_temp_Entry.pack()
@@ -238,8 +238,13 @@ class App(tk.Tk):
 
         text = "Done!\n--------------------------\nOutput:\n\nNumber of iteration: "
         text += str(iterations) + "\n\nOptimized Input:\n"
-        for output in optimized_input:
-            text += str(output) + "\n"
+
+        labels = ["IGV: ", "HMR Flow: ", "HR/MR Ratio: ", "% Nitrogen: ",
+                  "% Methane: ", "% Ethane: ", "% Propane: ", "% Butane: ", 
+                  "Ambient temperature: ", "Kettle Level: "]
+        
+        for output, label in zip(optimized_input, labels):
+            text += label + " " + str(output) + "\n"
         
 
         def percentage_increase(new, old):
